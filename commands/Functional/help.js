@@ -15,7 +15,7 @@ exports.run = (client, message, servers, args) => {
 
 	if(args[0]) {
 		let category = args[0].toLowerCase();
-		category =category.charAt(0).toUpperCase() + category.slice(1);
+		category = category.charAt(0).toUpperCase() + category.slice(1);
 		if(categories[category]) {
 			if(config.allow_moderation || (!config.allow_moderation && category != "Moderation"))
 				embed.addField("**"+category+"**", categories[category], false);

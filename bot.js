@@ -11,9 +11,9 @@ const client = new Discord.Client();
 // Keep seperate list of servers so bot is usable across multiple servers
 let servers = {};
 
-let commands = new Discord.Collection();
-let aliases = new Discord.Collection();
-
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+client.startTime = new Date();
 
 //TODO test this
 client.on("guildMemberAdd", (member) => {
@@ -72,10 +72,10 @@ client.on("message", (message) => {
 	    // call seperate file with command code
 	    try{
 			let commandFile;
-			if(commands.get(command))
-	        	commandFile = require(commands.get(command));
-			else if(aliases.get(command))
-				commandFile = require(aliases.get(command));
+			if(client.commands.get(command))
+	        	commandFile = require(client.commands.get(command));
+			else if(client.aliases.get(command))
+				commandFile = require(client.aliases.get(command));
 			else {
 				if(config.verbose)
 					message.channel.send(message.author + " invalid command. Type " + config.prefix + "help to see a list of commands.")
@@ -102,13 +102,14 @@ client.on("ready", () => {
 
 	//Populate command Collection
 	let commandFile = require("./data/commands-setup.js");
-	commandFile.run(commands, aliases);
+	commandFile.run(client.commands, client.aliases);
 
 	//Generate help json
 	let helpFile = require("./data/help-setup.js");
-	helpFile.run(commands);
+	helpFile.run(client.commands);
 
-	client.user.setActivity("!!help");
+	client.user.setActivity("omg christian so fukin dum");
+	client.startTime = Date.now();
   	console.log("Bot Online");
 });
 
@@ -116,6 +117,7 @@ client.on("ready", () => {
 client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
+//client.login("NDg0MTYwMTgyNzgwMjk3MjMx.DmeRJw.VOBXzgv-oKjdG9vSXqfwg8Qr6Tg");
 client.login(auth.discord_token);
 
 

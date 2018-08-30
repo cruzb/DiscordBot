@@ -13,7 +13,7 @@ exports.run = (client, message, servers, args) => {
 		//TODO allow search by any category by default
 		//TODO switch to custom emoji
 		hiscores.getPlayer({ name: args.join(', '), type: constants.playerTypes.normal }).then((data) => {
-			console.dir(data, {depth : 4, colors : true});
+			//console.dir(data, {depth : 4, colors : true});
 			const embed = new Discord.RichEmbed()
 				.setTitle(data.name + "\'s Stats")
 				.setAuthor(client.user.username, client.user.avatarURL)
@@ -32,22 +32,22 @@ exports.run = (client, message, servers, args) => {
 				//.addBlankField()
 				.addField("Ranging:bow_and_arrow:","**Level: **" + data.ranged.level + "\n**Experience: **" + data.ranged.experience + "\n**Rank: **" + data.ranged.rank,true)
 				.addField("Thieving:spy:","**Level: **" + data.thieving.level + "\n**Experience: **" + data.thieving.experience + "\n**Rank: **" + data.thieving.rank,true)
-				.addField("Cooking:cooking:","**Level: **" + data.cooking.level + "\n**Experience: **" + data.cooking.experience + "\n**Rank: **" + data.cooking.rank,true)
+				.addField("Cooking:fork_and_knife:","**Level: **" + data.cooking.level + "\n**Experience: **" + data.cooking.experience + "\n**Rank: **" + data.cooking.rank,true)
 				//.addBlankField()
 				.addField("Prayer:star:","**Level: **" + data.prayer.level + "**\nExperience: **" + data.prayer.experience + "\n**Rank: **" + data.prayer.rank,true)
 				.addField("Crafting:hammer_pick:","**Level: **" + data.crafting.level + "\n**Experience: **" + data.crafting.experience + "\n**Rank: **" + data.crafting.rank,true)
 				.addField("Firemaking:fire:","**Level: **" + data.firemaking.level + "\n**Experience: **" + data.firemaking.experience + "\n**Rank: **" + data.firemaking.rank,true)
 				//.addBlankField()
 				.addField("Magic:8ball:","**Level: **" + data.magic.level + "\n**Experience: **" + data.magic.experience + "\n**Rank: **" + data.magic.rank,true)
-				.addField("Fletching","**Level: **" + data.fletching.level + "\n**Experience: **" + data.fletching.experience + "\n**Rank: **" + data.fletching.rank,true)
-				.addField("Woodcutting","**Level: **" + data.woodcutting.level + "\n**Experience: **" + data.woodcutting.experience + "\n**Rank: **" + data.woodcutting.rank,true)
+				.addField("Fletching:tanabata_tree:","**Level: **" + data.fletching.level + "\n**Experience: **" + data.fletching.experience + "\n**Rank: **" + data.fletching.rank,true)
+				.addField("Woodcutting:deciduous_tree:","**Level: **" + data.woodcutting.level + "\n**Experience: **" + data.woodcutting.experience + "\n**Rank: **" + data.woodcutting.rank,true)
 				//.addBlankField()
-				.addField("Runecrafting","**Level: **" + data.runecrafting.level + "\n**Experience: **" + data.runecrafting.experience + "**\nRank: **" + data.runecrafting.rank,true)
-				.addField("Slayer","**Level: **" + data.slayer.level + "\n**Experience: **" + data.slayer.experience + "\n**Rank: **" + data.slayer.rank,true)
-				.addField("Farming","**Level: **" + data.farming.level + "\n**Experience: **" + data.farming.experience + "\n**Rank: **" + data.farming.rank,true)
+				.addField("Runecrafting:slight_frown:","**Level: **" + data.runecrafting.level + "\n**Experience: **" + data.runecrafting.experience + "**\nRank: **" + data.runecrafting.rank,true)
+				.addField("Slayer:skull:","**Level: **" + data.slayer.level + "\n**Experience: **" + data.slayer.experience + "\n**Rank: **" + data.slayer.rank,true)
+				.addField("Farming:shower:","**Level: **" + data.farming.level + "\n**Experience: **" + data.farming.experience + "\n**Rank: **" + data.farming.rank,true)
 				//.addBlankField()
-				.addField("Construction","**Level: **" + data.construction.level + "\n**Experience: **" + data.construction.experience + "\n**Rank: **" + data.construction.rank,true)
-				.addField("Hunter","**Level: **" + data.hunter.level + "\n**Experience: **" + data.hunter.experience + "\n**Rank: **" + data.hunter.rank,true)
+				.addField("Construction:tools:","**Level: **" + data.construction.level + "\n**Experience: **" + data.construction.experience + "\n**Rank: **" + data.construction.rank,true)
+				.addField("Hunter:feet:","**Level: **" + data.hunter.level + "\n**Experience: **" + data.hunter.experience + "\n**Rank: **" + data.hunter.rank,true)
 				.addField("Total Level","**Level: **" + data.overall.level + "\n**Experience: **" + data.overall.experience + "\n**Rank: **" + data.overall.rank,true)
 
 

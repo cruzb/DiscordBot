@@ -37,8 +37,9 @@ exports.run = (client, message, servers, args) => {
         	//TODO find season without hardcode
           	const season = player.getPlayerSeason('division.bro.official.2018-08')
           	.then(season => {
+				let gamemodeTitle = gamemode.charAt(0).toUpperCase() + gamemode.slice(1);
       			const embed = new Discord.RichEmbed()
-      				.setTitle(args[0] + "\'s **" + gamemode + "** Stats")
+      				.setTitle(args[0] + "\'s **" + gamemodeTitle + "** Stats")
       				.setAuthor(client.user.username, client.user.avatarURL)
       				.addField("Kills",season.attributes.gameModeStats[gamemode].kills,true)
 					.addField("Deaths",season.attributes.gameModeStats[gamemode].losses,true)
@@ -53,6 +54,7 @@ exports.run = (client, message, servers, args) => {
 		            .addField("Team Kills",season.attributes.gameModeStats[gamemode].teamKills,true)
 		            .addField("Top 10s",season.attributes.gameModeStats[gamemode].top10s,true)
 
+					.setThumbnail("https://pubattlegroundstips.com/wp-content/uploads/2018/02/pubg-orange-square.png")
       				.setColor(config.embed_color)
       				.setFooter("Try adding a game type parameter to see stats for different gamemodes.")
       				.setTimestamp()

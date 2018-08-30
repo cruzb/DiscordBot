@@ -1,5 +1,19 @@
 exports.run = (client, message, servers, args) => {
-    message.channel.send("pong!");
+	message.channel.send("Ping: " + client.pings[0] + " ms");
+	let uptime = Date.now();
+	uptime -= client.startTime;
+	message.channel.send("Uptime: " + msToTime(uptime));
+}
+
+function msToTime(s) {
+	let ms = s % 1000;
+	s = (s - ms) / 1000;
+	let secs = s % 60;
+	s = (s - secs) / 60;
+	let mins = s % 60;
+	let hrs = (s - mins) / 60;
+
+	return hrs + " hours, " + mins + " minutes " + secs + " seconds";
 }
 
 exports.help = {
@@ -14,6 +28,6 @@ exports.config = {
 	enabled: true,
 	guildOnly: false,
 	permissionLevel: 1,
-	aliases: [  ],
+	aliases: [ "uptime", "connection" ],
 	perms: [  ]
 };
