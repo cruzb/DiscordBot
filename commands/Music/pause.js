@@ -7,6 +7,7 @@ exports.run = (client, message, servers, args) => {
 		return message.channel.send(message.author + " nothing is currently playing.");
 
 	server.dispatcher.pause();
+	message.channel.send(message.author + " paused the queue.")
 }
 
 exports.help = {

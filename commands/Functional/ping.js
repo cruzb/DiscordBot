@@ -13,7 +13,7 @@ function msToTime(s) {
 	let mins = s % 60;
 	let hrs = (s - mins) / 60;
 
-	return hrs + " hours, " + mins + " minutes " + secs + " seconds";
+	return hrs + "h " + mins + "m " + secs + "s";
 }
 
 exports.help = {

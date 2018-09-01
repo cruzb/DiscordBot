@@ -202,14 +202,15 @@ function setupSQL() {
 	const likesTable = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='likes';").get();
 	if(!likesTable['count(*)']) {
 		// If the table isn't there, create it and setup the database correctly.
-	   	sql.prepare("CREATE TABLE likes (id TEXT PRIMARY KEY, user INTEGER, videoid TEXT, type TEXT, plays INTEGER, title TEXT);").run();
+	   	sql.prepare("CREATE TABLE likes (id TEXT PRIMARY KEY, user INTEGER, videoid TEXT, type TEXT, title TEXT);").run();
 	   	// Ensure that the "id" row is always unique and indexed.
 	   	sql.prepare("CREATE INDEX idx_likes_id ON likes (id);").run();
 	   	sql.pragma("synchronous = 1");
 	   	sql.pragma("journal_mode = wal");
 	}
 	client.getLike = sql.prepare("SELECT * FROM likes WHERE id = ?");
-	client.setLike = sql.prepare("INSERT OR REPLACE INTO likes (id, user, videoid, type, plays, title) VALUES (@id, @user, @videoid, @type, @plays, @title);");
+	client.getLikes = sql.prepare("SELECT * FROM likes WHERE user = ?");
+	client.setLike = sql.prepare("INSERT OR REPLACE INTO likes (id, user, videoid, type, title) VALUES (@id, @user, @videoid, @type, @title);");
 	client.delLike = sql.prepare("DELETE FROM likes WHERE id = ?")
 
 	////////////////////////////////////////////////////

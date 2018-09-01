@@ -7,6 +7,8 @@ exports.run = (client, message, servers, args) => {
 		return message.channel.send(message.author + " nothing is currently playing.");
 
 	server.dispatcher.end();
+	message.channel.send(message.author + " skipped the current song.");
+	//TODO voting /forceskip
 }
 
 exports.help = {

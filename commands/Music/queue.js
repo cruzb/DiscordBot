@@ -47,10 +47,10 @@ exports.run = (client, message, servers, args) => {
 
 	let id = youtubeID(path);
 	youtubeInfo(id).then((info) => {
-		console.log(id);
-		console.log(info);
+
 		let song = {
 			type: "youtube", // TODO:
+			id: id,
 			author: message.member,
 			data: info
 		}

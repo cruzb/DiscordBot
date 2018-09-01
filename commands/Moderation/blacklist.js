@@ -3,7 +3,7 @@ const config = require("../../config.json");
 exports.run = (client, message, servers, args) => {
 	if(!config.allow_moderation) return;
 	//TODO user different permission?
-	if(!message.guild) return; //ignore private messages
+
 	if(args[1]) return message.channel.send(message.author + " that's too many arguments! Just tag the target.")
 
 

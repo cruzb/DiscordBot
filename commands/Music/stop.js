@@ -10,7 +10,8 @@ exports.run = (client, message, servers, args) => {
 		server.queue.splice(i, 1);
 	}
 	server.dispatcher.end();
-	message.member.voiceChannel.leave();
+	message.guild.me.voiceChannel.leave();
+	message.channel.send(message.author + " stopped the queue.");
 }
 
 
