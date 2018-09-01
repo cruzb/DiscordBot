@@ -11,9 +11,10 @@ const client = new Discord.Client();
 // Keep seperate list of servers so bot is usable across multiple servers
 let servers = {};
 
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
+client.commands = new Discord.Collection(); //key: command names, val: path to command file
+client.aliases = new Discord.Collection(); //key: aliases as defined in command.configs, val: path to command file
 client.startTime = new Date();
+client.servers = new Discord.Collection(); //key: guild id, val: object with queue of song urls/paths, and dispatchers
 
 //TODO test this
 client.on("guildMemberAdd", (member) => {
@@ -195,4 +196,33 @@ function setupSQL() {
 	client.getBlacklist = sql.prepare("SELECT * FROM blacklist WHERE id = ?");
 	client.setBlacklist = sql.prepare("INSERT OR REPLACE INTO blacklist (id, user, guild) VALUES (@id, @user, @guild);");
 	client.delBlacklist = sql.prepare("DELETE FROM blacklist WHERE id = ?")
+
+	///////////////////////////////////////////////////
+
+	const likesTable = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='likes';").get();
+	if(!likesTable['count(*)']) {
+		// If the table isn't there, create it and setup the database correctly.
+	   	sql.prepare("CREATE TABLE likes (id TEXT PRIMARY KEY, user INTEGER, videoid TEXT, type TEXT, plays INTEGER, title TEXT);").run();
+	   	// Ensure that the "id" row is always unique and indexed.
+	   	sql.prepare("CREATE INDEX idx_likes_id ON likes (id);").run();
+	   	sql.pragma("synchronous = 1");
+	   	sql.pragma("journal_mode = wal");
+	}
+	client.getLike = sql.prepare("SELECT * FROM likes WHERE id = ?");
+	client.setLike = sql.prepare("INSERT OR REPLACE INTO likes (id, user, videoid, type, plays, title) VALUES (@id, @user, @videoid, @type, @plays, @title);");
+	client.delLike = sql.prepare("DELETE FROM likes WHERE id = ?")
+
+	////////////////////////////////////////////////////
+
+	const playsTable = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='plays';").get();
+	if(!playsTable['count(*)']) {
+		// If the table isn't there, create it and setup the database correctly.
+	   	sql.prepare("CREATE TABLE plays (videoid TEXT PRIMARY KEY, plays INTEGER, likes INTEGER, type TEXT);").run();
+	   	// Ensure that the "id" row is always unique and indexed.
+	   	sql.prepare("CREATE UNIQUE INDEX idx_plays_id ON likes (videoid);").run();
+	   	sql.pragma("synchronous = 1");
+	   	sql.pragma("journal_mode = wal");
+	}
+	client.getPlays = sql.prepare("SELECT * FROM plays WHERE videoid = ?");
+	client.setPlays = sql.prepare("INSERT OR REPLACE INTO plays (videoid, plays, likes, type) VALUES (@videoid, @plays, @likes, @type);");
 }

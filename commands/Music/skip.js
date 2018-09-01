@@ -1,13 +1,19 @@
 exports.run = (client, message, servers, args) => {
-	var server = servers[message.guild.id];
-	if(server.dispatcher) server.dispatcher.end();
+	if(!client.servers.get(message.guild.id) || !message.guild.voiceConnection)
+		return message.channel.send(message.author + " nothing is currently playing.");
+
+	let server = client.servers.get(message.guild.id);
+	if(!server.currentSong && server.queue.length == 0)
+		return message.channel.send(message.author + " nothing is currently playing.");
+
+	server.dispatcher.end();
 }
 
 exports.help = {
 	name: "skip",
 	category: "Music",
 	usage: "skip",
-	help: "Skip the currently playing song on the queue (nonfunctional)",
+	help: "Skip the currently playing song on the queue",
 	dev: false
 }
 
