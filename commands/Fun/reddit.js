@@ -102,9 +102,6 @@ exports.run = (client, message, servers, args) => {
 			 			+ "  |  Gilds: " + post.gilded)
 
 
-			//post.selftext
-		//if(postData.description) embed.setDescription(postData.description);
-
 
 
 		//self posts have no media to share

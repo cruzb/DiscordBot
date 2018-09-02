@@ -24,6 +24,8 @@ song:
 
 exports.run = (client, message, servers, args) => {
 	if(!args[0]) return showQueue(client, message);//return message.channel.send(message.author + " missing argument. Please include a url or search term.");
+	if((args[0].toLowerCase() == "youtube" || args[0].toLowerCase() == "soundcloud") && !args[1])
+		return message.channel.send(message.author + " missing argument. Please include a url or search term.");
 
 	if(!message.member.voiceChannel) return message.channel.send(message.author + " please join a voice channel.");
 	if(!message.member.voiceChannel.joinable) return message.channel.send(message.author + " I can't join that channel.");
@@ -76,7 +78,20 @@ exports.run = (client, message, servers, args) => {
 }
 
 
+//requires args[0] at least is non null
 
+function setupQuery(args) {
+	if(args[0].toLowerCase() == "youtube" && args[1]) {
+		if(ytdl.validateURL(args[1])) {
+			return args[1];
+		}
+		else {
+			args.shift(); //get rid of youtube arguments
+			let search = args.join(" ");
+			return
+		}
+	}
+}
 
 
 
@@ -146,6 +161,15 @@ function sToTime(s) {
 	return hrs + "h " + mins + "m " + secs + "s";
 }
 
+function isURL(str) {
+  	let pattern = new RegExp('^(https?:\/\/)?'+ // protocol
+	    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+	    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
+	    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
+	    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+	    '(\#[-a-z\d_]*)?$','i'); // fragment locater
+  	return pattern.test(str);
+}
 
 exports.help = {
 	name: "queue",
