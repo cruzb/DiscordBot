@@ -118,7 +118,6 @@ client.on("ready", () => {
 client.on("error", (e) => console.error(e));
 client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
-//client.login("NDg0MTYwMTgyNzgwMjk3MjMx.DmeRJw.VOBXzgv-oKjdG9vSXqfwg8Qr6Tg");
 client.login(auth.discord_token);
 
 

@@ -1,6 +1,12 @@
 auth.json
+todo.txt
 /node_modules
 node_modules/
+/build
+build/
+data/database.sqlite
+data/database.sqlite-shm
+data/database.sqlite-wal
 node_modules/discord.js/src/client/actions/GuildEmojiDelete.js
 node_modules/discord.js/src/client/actions/GuildEmojisUpdate.js
 node_modules/discord.js/src/client/actions/GuildEmojiUpdate.js
