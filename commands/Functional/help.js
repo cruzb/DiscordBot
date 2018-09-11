@@ -3,7 +3,7 @@ const config = require("../../config.json");
 const categories = require("../../data/help.json");
 
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(args[1]) return message.channel.send(message.author + " too many arguments! Try something like " + config.prefix + "help or " + config.prefix + " help fun");
 
 	const embed = new Discord.RichEmbed()

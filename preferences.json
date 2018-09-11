@@ -1,0 +1,29 @@
+{
+    "_audioPreferences": {
+        "_musicVolume": 0.1561265,
+        "_masterVolume": 0.2391304,
+        "_sfxVolume": 0.5375494,
+        "_tannoyVolume": 0.1010167,
+        "_djVolume": 0.01296838
+    },
+    "_controlPreferences": {
+        "MouseDirectionItemRotation": false,
+        "MouseRotateSensitivity": 4.0,
+        "UseRoomItemSnap": true,
+        "UseWallMagnetism": false,
+        "EnableEdgeScrolling": true,
+        "RewiredKeyboardMapXML": null
+    },
+    "_gamePreferences": {
+        "_levelAutoSaveFrequency": "Every3Months",
+        "_careerAutoSaveFrequency": "MostChanges",
+        "_numberOfRollingSavesToKeepIndex": 3,
+        "_autoSaveOnLevelChange": true,
+        "_onlineVisibility": true,
+        "_logLevel": "Warning"
+    },
+    "_languagePreferences": {
+        "_selectedLanguage": "English",
+        "DefaultLanguage": "English"
+    }
+}

@@ -5,7 +5,7 @@ const config = require("../../config.json");
 
 //TODO allow user change time window
 //TODO improve amount in request with random and sort
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	let subreddit = "all";
 	let window = "all";
 	let sort = "top";

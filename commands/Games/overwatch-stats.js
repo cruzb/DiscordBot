@@ -6,7 +6,7 @@ const defaultPlatform = "pc";
 const defaultRegion = "us";
 
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	let platforms = ["xbl", "psn", "pc"];
 	let regions = ["eu", "us", "as"];
 

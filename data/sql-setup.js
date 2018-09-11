@@ -1,6 +1,7 @@
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./database.sqlite');
-
+//// TODO:
+//DEPRECATED
 exports.run = (client) => {
 	//BEGIN point table setup
 	//generate point table and prepare sql commands

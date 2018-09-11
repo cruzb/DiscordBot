@@ -1,4 +1,4 @@
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	message.channel.send("Ping: " + client.pings[0] + " ms");
 	let uptime = Date.now();
 	uptime -= client.startTime;

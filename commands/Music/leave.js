@@ -1,4 +1,4 @@
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!message.guild.voiceConnection)
 		return message.channel.send(message.author + " I am not in a channel.");
 

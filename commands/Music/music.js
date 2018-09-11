@@ -3,7 +3,7 @@ const request = require('request-promise');
 const config = require("../../config.json");
 const auth = require("../../auth.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	let type = "m"; //search type artist or song
 	let index = config.prefix.length;
 	let identifier = message.content.charAt(index);

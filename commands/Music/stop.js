@@ -1,4 +1,4 @@
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!client.servers.get(message.guild.id) || !message.guild.voiceConnection)
 		return message.channel.send(message.author + " nothing is currently playing.");
 

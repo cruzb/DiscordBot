@@ -1,4 +1,4 @@
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	let rps = ["rock","paper","scissors"];
 	let myIndex = Math.floor(Math.random() * rps.length);
 

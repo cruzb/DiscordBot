@@ -2,7 +2,7 @@ const request = require('request');
 const Discord = require("discord.js");
 const config = require("../../config.json");
 
-exports.run = async (client, message, servers, args) => {
+exports.run = async (client, message, args) => {
 	if(!args[0]) message.channel.send(message.author + " add some math to evaluate!");
 
 	let expression = args.join(" ");
@@ -28,7 +28,7 @@ exports.help = {
 	help: "Evaluate a mathematical function"
 }
 exports.config = {
-	enabled: true,
+	enabled: false,
 	guildOnly: false,
 	permissionLevel: 1,
 	aliases: [  ],

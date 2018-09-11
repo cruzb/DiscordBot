@@ -3,7 +3,7 @@ const config = require("../../config.json");
 const categories = require("../../data/help.json");
 
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 
 
 }
@@ -18,7 +18,7 @@ exports.help = {
 }
 
 exports.config = {
-	enabled: true,
+	enabled: false,
 	guildOnly: false,
 	permissionLevel: 1,
 	aliases: [  ],

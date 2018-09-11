@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!args[0]) return message.channel.send(message.author + " missing argument. I need a command name to search for.");
 
 	let command = args[0].toLowerCase();

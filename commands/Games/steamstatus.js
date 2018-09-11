@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const request = require('request-promise');
 const config = require("../../config.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 
 	const options = {
 	    uri: `https://steamgaug.es/api/v2`,

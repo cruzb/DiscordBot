@@ -1,6 +1,6 @@
 const config = require("../../config.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	message.channel.fetchMessages().then((messages) => {
 		const toDelete = messages.filter(msg => msg.author == client.user || msg.content.startsWith(config.prefix));
 		message.channel.bulkDelete(toDelete);

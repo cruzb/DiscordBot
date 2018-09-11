@@ -1,6 +1,6 @@
 const responses = require("../../data/8ball.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	let response = responses.message[Math.floor(Math.random() * responses.message.length)];
 	message.channel.send(response);
 }

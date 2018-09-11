@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
     const embed = new Discord.RichEmbed()
 	    .setTitle("Server Information")
 	    .setColor(config.embed_color)

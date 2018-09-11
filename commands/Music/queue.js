@@ -22,7 +22,7 @@ song:
 */
 
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!args[0]) return showQueue(client, message);//return message.channel.send(message.author + " missing argument. Please include a url or search term.");
 	if((args[0].toLowerCase() == "youtube" || args[0].toLowerCase() == "soundcloud") && !args[1])
 		return message.channel.send(message.author + " missing argument. Please include a url or search term.");

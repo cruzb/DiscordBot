@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	let maxPerPage = 10;
 	let likes = client.getLikes.all(message.author.id);
 

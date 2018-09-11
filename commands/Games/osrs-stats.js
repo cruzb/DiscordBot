@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 
 	if(!args[0]) {
 		message.channel.send(message.author + " please provide a player name");

@@ -8,46 +8,28 @@ const sql = new SQLite('./data/database.sqlite');
 const client = new Discord.Client();
 
 
-// Keep seperate list of servers so bot is usable across multiple servers
-let servers = {};
-
 client.commands = new Discord.Collection(); //key: command names, val: path to command file
 client.aliases = new Discord.Collection(); //key: aliases as defined in command.configs, val: path to command file
 client.startTime = new Date();
 client.servers = new Discord.Collection(); //key: guild id, val: object with queue of song urls/paths, and dispatchers
 
 //TODO test this
-client.on("guildMemberAdd", (member) => {
+/*client.on("guildMemberAdd", (member) => {
 	if(config.greet_new_members && member.guild.channels.get(config.greeting_channel))
 		member.guild.channels.get(config.greeting_channel).send(member + " has joined the server.");
 });
 client.on("guildMemberLeave", (member) => {
 	if(config.farewell_leaving_members && member.guild.channels.get(config.farewell_channel))
 		member.guild.channels.get(config.farewell_channel).send(member + " has left the server.");
-});
+});*/
 
 
 // when the bot reads a message
 client.on("message", (message) => {
-    //respond with dumb things for certain users
-	myArray = ["","","","","","","","","","","","",":angry:",":angry:",":angry:",":rage::rage::rage:",":angry::angry::angry:",":cry:"];
-    if(message.author.id == 209497427504398336
-        ||  message.author.id == 139123675965161472){
-			var rand;
-			if(message.author.id == 209497427504398336)
-		 		rand = myArray[Math.floor(Math.random() * myArray.length)];
-			else rand = myArray[Math.floor(Math.random() * myArray.length-1)];
-
-      if(rand != "")
-      	message.channel.send(rand);
-      return;
-    }
-
+	//check blacklist before processing
 	if(message.guild) {
 		if(client.getBlacklist.get(`${message.guild.id}-${message.author.id}`)) return;
 	}
-
-
 
 	//ignore other bots
     if(message.author.bot) return;
@@ -57,15 +39,13 @@ client.on("message", (message) => {
 		//handle non commands here
 		try{
 	        let commandFile = require("./points/points-system.js");
-	        commandFile.run(client, message, servers);
+	        commandFile.run(client, message);
 	    }
 	    catch (err) {
 	        console.error(err);
 	    }
 	}
 	else {
-		//handle commands here
-
 	    // process input and split args for use
 	    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 	    const command = args.shift().toLowerCase();
@@ -86,7 +66,7 @@ client.on("message", (message) => {
 
 			//check self and sender for permission to perform action, also if can be run in guild
 			let hasPermission = checkForPermission(commandFile, message);
-	        if(hasPermission) commandFile.run(client, message, servers, args);
+	        if(hasPermission) commandFile.run(client, message, args);
 	    }
 	    catch (err) {
 	        console.error(err);

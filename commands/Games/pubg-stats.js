@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 const Client = new pubg.Client(auth.pubg_api_key, "pc-na");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!args[0]) {
 		message.channel.send(message.author + " please provide a player name");
 		return;
@@ -35,7 +35,7 @@ exports.run = (client, message, servers, args) => {
   	const player = Client.getPlayer({name: args[0]})
      	.then(player => {
         	//TODO find season without hardcode
-          	const season = player.getPlayerSeason('division.bro.official.2018-08')
+          	const season = player.getPlayerSeason('division.bro.official.2018-09')
           	.then(season => {
 				let gamemodeTitle = gamemode.charAt(0).toUpperCase() + gamemode.slice(1);
       			const embed = new Discord.RichEmbed()

@@ -1,7 +1,7 @@
 const auth = require("../../auth.json");
 const request = require('request');
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!args[0])
 		return message.channel.send(message.author + " please include a term to search.")
 

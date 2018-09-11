@@ -1,6 +1,6 @@
 const config = require("../../config.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!config.allow_moderation) return;
 	//TODO use different permission?
 

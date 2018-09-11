@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const request = require("request-promise");
 const config = require("../../config.json");
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	request("https://api.thecatapi.com/api/images/get?format=json").then(data => {
 		data = JSON.parse(data);
 		if(data[0]) {

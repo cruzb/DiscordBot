@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const config = require("../../config.json");
 
 
-exports.run = async (client, message, servers, args) => {
+exports.run = async (client, message, args) => {
 	//TODO fix promise style
 	let data = await request( { uri: 'https://xkcd.com/info.0.json', json: true } );
 	let comic;

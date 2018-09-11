@@ -1,4 +1,4 @@
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	if(!client.servers.get(message.guild.id)) return message.channel.send(message.author + " no song is currently playing.");;
 	let server = client.servers.get(message.guild.id)
 

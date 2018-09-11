@@ -3,7 +3,7 @@
 
 //Any message seen by this bot that is not sent by a bot and not a command
 //is handled in sent to this function for handling
-exports.run = (client, message, servers) => {
+exports.run = (client, message) => {
 	if(!message.guild) return; //ignore private messages
 	if(!message.content.includes("😠")) return;
 
@@ -21,12 +21,12 @@ exports.run = (client, message, servers) => {
 
 	score.points++;
 	// Calculate the current level through MATH OMG HALP.
-	const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
+	const currLevel = Math.floor(0.1 * Math.sqrt(score.points));
 
 	// Check if the user has leveled up, and let them know if they have:
-	if(score.level < curLevel) {
+	if(score.level < currLevel) {
   		// Level up!
-  		message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+  		message.reply(`You've leveled up to level **${currLevel}**! Ain't that dandy?`);
 	}
 	client.setScore.run(score);
 }

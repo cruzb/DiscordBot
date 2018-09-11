@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const hourMultiplier = 3600;
 
-exports.run = (client, message, servers, args) => {
+exports.run = (client, message, args) => {
 	let options = {
 		temporary: false,
 		maxAge: 86400,
