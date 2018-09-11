@@ -174,8 +174,8 @@ function isURL(str) {
 exports.help = {
 	name: "queue",
 	category: "Music",
-	usage: "queue [youtube|soundcloud] [url|search term]",
-	help: "Add a new song to the queue from youtube (nonfunctional)",
+	usage: "queue [youtube] [url]",//todo spotify and searches
+	help: "Add a new song to the queue from youtube",
 	dev: false
 }
 

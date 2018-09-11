@@ -74,8 +74,8 @@ exports.run = (client, message, args) => {
 exports.help = {
 	name: "pubg-stats",
 	category: "Games",
-	usage: "pubg-stats <username> [gamemode] [region]",
-	help: "Check the PUBG stats of a player (TODO region)",
+	usage: "pubg-stats <username> [gamemode]",//TODO region
+	help: "Check the PUBG stats of a player",
 	dev: false
 }
 

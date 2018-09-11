@@ -183,7 +183,7 @@ exports.help = {
 	name: "music",
 	category: "Music",
 	usage: "music <artist|song> [search terms]",
-	help: "Shows info related to a given artist or song. Powered by GENIUS",
+	help: "Shows info related to a given artist or song",
 	dev: false
 }
 

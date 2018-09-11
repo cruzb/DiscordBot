@@ -80,8 +80,8 @@ exports.run = (client, message, args) => {
 exports.help = {
 	name: "overwatch-stats",
 	category: "Games",
-	usage: "overwatch-stats <username> [region]",
-	help: "Check the overwatch stats of a player (TODO region)",
+	usage: "overwatch-stats <username>",//TODO region
+	help: "Check the overwatch stats of a player",
 	dev: false
 }
 

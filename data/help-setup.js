@@ -11,6 +11,8 @@ exports.run = (commands) => {
 		if(!categories.hasOwnProperty(command.help.category)) return console.log("---Error " + c + " has improper category name---");
 
 		if(command.help.dev) return; //exclude dev commands
+		if(!command.config.enabled) return;
+
 
 		//per config exclude moderation commands
 		if(!config.allow_moderation && command.help.category == "Moderation") {

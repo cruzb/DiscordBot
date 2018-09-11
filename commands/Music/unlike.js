@@ -43,7 +43,7 @@ exports.help = {
 	name: "unlike",
 	category: "Music",
 	usage: "unlike [page] [num on Page]",
-	help: "Unlike the current song or some song from your likes list (page deletion nonfunctional)",
+	help: "Unlike the current song or some song from your likes list",
 	dev: false
 }
 
