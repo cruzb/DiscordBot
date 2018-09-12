@@ -89,7 +89,7 @@ client.on("ready", () => {
 	let helpFile = require("./data/help-setup.js");
 	helpFile.run(client.commands);
 
-	client.user.setActivity("omg christian so fukin dum");
+	client.user.setActivity("!!help");
 	client.startTime = Date.now();
   	console.log("Bot Online");
 });
