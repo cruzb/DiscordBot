@@ -22,12 +22,17 @@ exports.run = async (client, message, args) => {
 			.setTitle(data.word)
 			.setAuthor(data.author)
 			.setURL(data.permalink)
+			.setColor(config.embed_color)
 			.setFooter("Powered by Urban Dictionary")
 
 
 
-		if(data.example)
-			embed.addField("Example", data.example.replace(/[\[\]]+/g, ''), false);
+		if(data.example) {
+			if(data.example.length < 400)
+				embed.addField("Example", data.example.replace(/[\[\]]+/g, ''), false);
+			else
+				embed.addField("Example", data.example.replace(/[\[\]]+/g, '').substring(0,397) + "...", false);
+		}
 
 		let def = data.definition.toString().replace(/[\[\]]+/g, '');
 		if(def.length < 500)

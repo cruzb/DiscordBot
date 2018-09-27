@@ -22,6 +22,7 @@
     "request-promise": "^4.2.2",
     "winston": "^3.0.0",
     "youtube-info": "^1.2.0",
+    "youtube-search": "^1.1.1",
     "ytdl-core": "^0.24.0"
   },
   "scripts": {

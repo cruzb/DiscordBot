@@ -91,7 +91,6 @@ exports.run = (client, message, args) => {
 
 		//console.dir(post,  {depth:5, colors:true});
 		const embed = new Discord.RichEmbed()
-			.setTitle(post.title)
 			.setAuthor("/u/" + post.author + "   |   /" + post.subreddit_name_prefixed + "")
 			.setURL("https://reddit.com" + post.permalink)
 
@@ -102,6 +101,10 @@ exports.run = (client, message, args) => {
 			 			+ "  |  Gilds: " + post.gilded)
 
 
+		if(post.title.length > 256) {
+			embed.setTitle(post.title.substring(0,253) + "...");
+		}
+		else embed.setTitle(post.title);
 
 
 		//self posts have no media to share
@@ -110,7 +113,6 @@ exports.run = (client, message, args) => {
 				embed.setDescription(post.selftext);
 			else
 				embed.setDescription(post.selftext.substring(0,2045) + "...")
-
 		}
 		else if(!post.post_hint || post.post_hint.includes("link")) {
 			if(post.preview){

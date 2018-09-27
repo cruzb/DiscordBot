@@ -1,9 +1,11 @@
 const Discord = require("discord.js");
 const config = require("../../config.json");
+const auth = require("../../auth.json");
 const ytdl = require("ytdl-core");
+const ytsearch = require("youtube-search");
 const youtubeID = require("get-youtube-id");
 const youtubeInfo = require('youtube-info');
-
+const url = require("url");
 
 
 /*
@@ -12,7 +14,6 @@ server:
 	dispatcher: dispatcher object
 	currentsong: song info ytinfo object
 	title:
-
 
 
 song:
@@ -24,29 +25,57 @@ song:
 
 exports.run = (client, message, args) => {
 	if(!args[0]) return showQueue(client, message);//return message.channel.send(message.author + " missing argument. Please include a url or search term.");
-	if((args[0].toLowerCase() == "youtube" || args[0].toLowerCase() == "soundcloud") && !args[1])
-		return message.channel.send(message.author + " missing argument. Please include a url or search term.");
+	//if((args[0].toLowerCase() == "youtube" || args[0].toLowerCase() == "soundcloud") && !args[1])
+		//return message.channel.send(message.author + " missing argument. Please include a url or search term.");
 
 	if(!message.member.voiceChannel) return message.channel.send(message.author + " please join a voice channel.");
 	if(!message.member.voiceChannel.joinable) return message.channel.send(message.author + " I can't join that channel.");
-
-	//TODO determine url validity
-	//TODO search if not
-	let path = args[0];
-	let data;
 
 	//if there is no server server obj for this server make one
 	//server:
 	//    queue: [] array of song objects
 	//	  dispatcher: dispatcher object
 	//	  currentsong: song info ytinfo object
-
 	if(!client.servers.get(message.guild.id))
 		client.servers.set(message.guild.id, {queue: [], dispatcher: null, currentSong: null});
 	let server = client.servers.get(message.guild.id);
 
 
 
+	//determine if url or search
+	let myurl;
+	let isurl = false;
+	try {
+		myurl = new URL(args[0]);
+		isurl = true;
+	}
+	catch(err) { }
+
+	if(isurl) {
+		const host = myurl.host;
+		if(!host.startsWith("www.youtube")) return	message.channel.send(message.author + " invalid url. I can only process youtube or spotify urls at this time.")
+		enqueue(server, myurl.toString(), message);
+	}
+	else {
+		//if adding additional queue sources make that here
+		//if(type != "youtube")
+		//	return message.channel.send(message.author + " invalid search. I can only process youtube or spotify searches at this time.")
+
+		let search = args.join(" ");
+		const options = {
+			maxResults: 1,
+			key: auth.youtube_api_key,
+		}
+		ytsearch(search, options, function(err, res) {
+			if(err) return console.log(err); //TODO fix
+			enqueue(server, res[0].link, message);
+		});
+	}
+
+}
+
+
+function enqueue(server, path, message) {
 	let id = youtubeID(path);
 	youtubeInfo(id).then((info) => {
 
@@ -78,24 +107,6 @@ exports.run = (client, message, args) => {
 }
 
 
-//requires args[0] at least is non null
-
-function setupQuery(args) {
-	if(args[0].toLowerCase() == "youtube" && args[1]) {
-		if(ytdl.validateURL(args[1])) {
-			return args[1];
-		}
-		else {
-			args.shift(); //get rid of youtube arguments
-			let search = args.join(" ");
-			return
-		}
-	}
-}
-
-
-
-
 function play(server, connection){
 	server.dispatcher = connection.playStream(ytdl(server.queue[0].data.url, {filter:"audioonly"}));
 	server.currentSong = server.queue[0];
@@ -113,18 +124,6 @@ function play(server, connection){
 		}
 	});
 }
-
-//function isValid(url){
-//	return url.toLowerCase().indexOf("youtube.com" > -1);
-//} 28:52
-
-function searchVideos() {}
-
-
-
-
-
-
 
 
 function showQueue(client, message) {
@@ -161,20 +160,12 @@ function sToTime(s) {
 	return hrs + "h " + mins + "m " + secs + "s";
 }
 
-function isURL(str) {
-  	let pattern = new RegExp('^(https?:\/\/)?'+ // protocol
-	    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
-	    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
-	    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
-	    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
-	    '(\#[-a-z\d_]*)?$','i'); // fragment locater
-  	return pattern.test(str);
-}
+
 
 exports.help = {
 	name: "queue",
 	category: "Music",
-	usage: "queue [youtube] [url]",//todo spotify and searches
+	usage: "queue [url] [search term]",//todo spotify and searches
 	help: "Add a new song to the queue from youtube",
 	dev: false
 }
