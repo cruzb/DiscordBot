@@ -4,7 +4,7 @@ const config = require("../../config.json");
 const request = require('request-promise');
 
 exports.run = (client, message, args) => {
-	let season = "division.bro.official.2018-09";
+	let season = "division.bro.official.pc-2018-02";
 
 	if(!args[0]) {
 		message.channel.send(message.author + " please provide a player name.");

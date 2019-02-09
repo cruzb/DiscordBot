@@ -136,6 +136,11 @@ function checkForPermission(commandFile, message) {
 		if(config.verbose) message.channel.send(message.author + " command is disabled.");
 		hasPermission = false;
 	}
+	if(commandFile.config.dev) {
+		if(message.member.id != config.creatorID)
+			hasPermission = false;
+	}
+
 	return hasPermission;
 }
 
